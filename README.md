@@ -1,4 +1,4 @@
-[原文](https://hyp.ink/index.php/archives/773/)) 
+[原文](https://hyp.ink/index.php/archives/773/)
 
 本文介绍一种部署在边缘节点的修改Minecraft服务器列表MOTD信息的方法。
 感谢bangbang93于2021年提供的思路： [GitHub Repo minecraft-proxy](https://github.com/bangbang93/minecraft-proxy) 
