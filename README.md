@@ -1,5 +1,5 @@
-本文介绍一种部署在边缘节点的修改Minecraft服务器列表MOTD信息的方法，Demo如下：
-![](https://hyp.ink/usr/uploads/2024/11/2175482623.png)
+[原文]([https://github.com/bangbang93/minecraft-proxy](https://hyp.ink/index.php/archives/773/)) 
+本文介绍一种部署在边缘节点的修改Minecraft服务器列表MOTD信息的方法。
 图中MikeWu597，即软件实现的基于IP地址实时判定游戏ID的方法。
 感谢bangbang93于2021年提供的思路： [GitHub Repo minecraft-proxy](https://github.com/bangbang93/minecraft-proxy) 
 
