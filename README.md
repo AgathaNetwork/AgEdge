@@ -43,6 +43,7 @@
 TransPortData库对数据进行处理，流程如下：
 ```java
 try {
+            int TimeoutStamp=0;
             while(true){
 
                 InputStream in = getDataSocket.getInputStream() ;
@@ -51,10 +52,15 @@ try {
                 byte[] data = new byte[2048];
                 int readlen = in.read(data);
 
-                //如果没有数据，则暂停
+                //如果没有数据，则暂停，超时销毁资源
                 if(readlen<=0){
+                    TimeoutStamp++;
+                    if(TimeoutStamp>=300){
+                        break;
+                    }
                     Thread.sleep(100);
                     continue;
+
                 }
                 System.out.println(data[7]);
                 //118, 101, 114, 115, 105, 111, 110 version
@@ -69,11 +75,10 @@ try {
                                 if(("/"+entry.getKey()).equalsIgnoreCase(ip))editStr=("✔ "+entry.getValue()+"\",\"color\":\"green\",\"bold\":true},{\"text\":\"");
                             }
                             byte[] editBytes=editStr.getBytes();
-                            for(int j=offset;j<offset+editBytes.length;j++)data[j]=editBytes[j-offset];
+                            for(int j=offset;j<offset+editBytes.length;j++)data[j]=editBytes[j-offset];//注入
                         }
                     }
                     System.out.println(new String(data));
-                    //{"text":"DMS-Success","color":"green"},"
                     //offset-2
                     out.write(data ,0,readlen);
                 }
@@ -102,6 +107,8 @@ try {
             } catch (Exception exx) {
             }
         }
+        System.out.println("线程已结束");
+        interrupt();
 ```
 其中通过一个if语句快速执行对MOTD数据包的判定（即头文字"version"），检测到MOTD信息发送时立即劫持修改数据。修改时，通过服务端预设的关键字（此处为"nvv"）确定修改起始位置，预留足够多的空格避免超长。如需彻底解决此问题，需要像上述bangbang93仓库中代码一样完全重新构建一个MOTD数据包。这里为了降低复杂度、便于劫持，仅做了简单的修改功能。
 
