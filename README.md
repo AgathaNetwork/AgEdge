@@ -1,5 +1,5 @@
-[原文](https://hyp.ink/index.php/archives/773/)
-
+[原文（已修改）](https://hyp.ink/index.php/archives/773/)
+**已于2025年2月28日新增线程回收代码，修复程序持久性不高的问题**
 本文介绍一种部署在边缘节点的修改Minecraft服务器列表MOTD信息的方法。
 感谢bangbang93于2021年提供的思路： [GitHub Repo minecraft-proxy](https://github.com/bangbang93/minecraft-proxy) 
 
