@@ -28,6 +28,7 @@ public class TransPortData extends Thread {
 
     public void run(){
         try {
+            int TimeoutStamp=0;
             while(true){
 
                 InputStream in = getDataSocket.getInputStream() ;
@@ -36,10 +37,15 @@ public class TransPortData extends Thread {
                 byte[] data = new byte[2048];
                 int readlen = in.read(data);
 
-                //如果没有数据，则暂停
+                //如果没有数据，则暂停，超时销毁资源
                 if(readlen<=0){
+                    TimeoutStamp++;
+                    if(TimeoutStamp>=300){
+                        break;
+                    }
                     Thread.sleep(100);
                     continue;
+
                 }
                 System.out.println(data[7]);
                 //118, 101, 114, 115, 105, 111, 110 version
@@ -86,6 +92,8 @@ public class TransPortData extends Thread {
             } catch (Exception exx) {
             }
         }
+        System.out.println("线程已结束");
+        interrupt();
     }
 
 }
